@@ -25,7 +25,7 @@ npm init -y > /dev/null
 
 #  4 Install dependencies
 echo "\e[32m4 - Installing dependencies\e[39m" 
-npm install discord.js wokcommands nodemon mongoose dotenv 
+npm install discord.js wokcommands nodemon mongoose dotenv
 
 #  5 Edit package.json
 echo "\e[32m5 - Editing package.json\e[39m" 
@@ -41,14 +41,21 @@ touch .env .gitignore index.js commands/command-example.js features/feature-exam
 
 #  8 Write to .env
 echo "\e[32m8 - Writing to .env\e[39m" 
-echo "DICORD_TOKEN=\nMONGO_URI=" > .env
+echo "DISCORD_TOKEN=\nMONGO_URI=" > .env
 
-#  9 Write to index.js
-echo "\e[32m9 - Writing to index.js\e[39m" 
+# 9 Write to .gitignore
+echo "\e[32m9 - Writing to .gitignore\e[39m"
+echo "node_modules\n.env" > .gitignore
+
+#  10 Write to index.js
+echo "\e[32m10 - Writing to index.js\e[39m" 
 echo 'const { Client, IntentsBitField, Partials } = require("discord.js");
 const WOK = require("wokcommands");
 const path = require("path");
 require("dotenv/config");
+
+const dotenv = require("dotenv");
+dotenv.config();
 
 const client = new Client({
 	intents: [
@@ -72,13 +79,14 @@ client.on("ready", () => {
 	});
 });
 
-client.login(process.env.TOKEN);' > index.js
+client.login(process.env.DISCORD_TOKEN);' > index.js
 
-#10 Write to command-example.js
-echo "\e[32m10 - Writing to command-example.js\e[39m"
-echo 'module.exports = {
-	// REQUIRED
-	// This function will be invoked when users run this command
+#11 Write to command-example.js
+echo "\e[32m11 - Writing to command-example.js\e[39m"
+echo 'const Discord = require("discord.js");
+const { CommandType } = require("wokcommands");
+
+module.exports = {
 	callback: ({client, instance, message, interaction, args, text, guild, member, user, channel, cancelCooldown, updateCooldown,}) => {
 		// Command
 	},
@@ -96,13 +104,6 @@ echo 'module.exports = {
 	// true\
 	// false\
 	deferReply: false,
-	cooldowns: {
-		errorMessage: "Please wait {TIME}",
-		perUser: 10, 
-		perUserPerGuild: "10 s", 
-		perGuild: "10 h",
-		global: "1 d",
-	},
 	minArgs: 0,
 	maxArgs: -1,
 	correctSyntax: "Correct syntax: {PREFIX}{COMMAND} {ARGS}",
@@ -112,28 +113,27 @@ echo 'module.exports = {
 	delete: false
 }' > commands/command-example.js
 
-#11 Write to feature-example.js
-echo "\e[32m11 - Writing to feature-example.js\e[39m"
-echo 'module.exports = (instance, client) => {
-  console.log("Hello World!");
+#12 Write to feature-example.js
+echo "\e[32m12 - Writing to feature-example.js\e[39m"
+echo 'const Discord = require("discord.js");
+
+module.exports = (instance, client) => {
+
 };' > features/feature-example.js
 
-# 12 Write to schema-example.js
-echo "\e[32m12 - Writing to feature-example.js\e[39m"
+# 13 Write to schema-example.js
+echo "\e[32m13 - Writing to feature-example.js\e[39m"
 echo 'const mongoose = require("mongoose");
 
 const SE_Schema = new mongoose.Schema({
-  Title: String,
-  Description: String,
-  Link: String,
-  Picture: String,
+	Title: String,
+	Description: String,
+	Link: String,
+	Picture: String,
 });
 module.exports = mongoose.model("Schema Example", SE_Schema);
 module.exports.config = {
-  dbName: "schema-example",
-  displayName: "Schema Example",
+	dbName: "schema-example",
+	displayName: "Schema Example",
 };' > schemas/schema-example.js
 
-# 13 Write to .gitignore
-echo "\e[32m13 - Writing to .gitignore\e[39m"
-echo "node_modules\n.env" .gitignore
