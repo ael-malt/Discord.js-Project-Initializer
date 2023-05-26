@@ -8,4 +8,4 @@ This project aims to create a folder with everything you need to start on your D
 2. `cd` into the root directory and run `./initialize-project.sh <Project Name`
 
         cd Discord.js-Project-Initializer
-        ./initialize-project.sh <Project Name
+        ./initialize-project.sh <Project Name>
