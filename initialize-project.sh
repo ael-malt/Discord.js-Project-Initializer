@@ -131,7 +131,7 @@ const SE_Schema = new mongoose.Schema({
 	Link: String,
 	Picture: String,
 });
-module.exports = mongoose.model("Schema Example", SE_Schema);
+module.exports = mongoose.model("schema-example", SE_Schema);
 module.exports.config = {
 	dbName: "schema-example",
 	displayName: "Schema Example",
