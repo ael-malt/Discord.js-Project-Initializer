@@ -49,7 +49,7 @@ echo "node_modules\n.env" > .gitignore
 
 #  10 Write to index.js
 echo "\e[32m10 - Writing to index.js\e[39m" 
-echo 'const { Client, IntentsBitField, Partials } = require("discord.js");
+echo 'const { Client, IntentsBitField, Partials, ActivityType } = require("discord.js");
 const WOK = require("wokcommands");
 const path = require("path");
 require("dotenv/config");
@@ -69,7 +69,7 @@ const client = new Client({
 
 client.on("ready", () => {
 	console.log(`${client.user.username} is Ready!`);
-	client.user.setActivity("<STATUS>", { type: "PLAYING" });
+	client.user.setActivity("<STATUS>", { type: ActivityType.Watching });
 	new WOK({
 		client,
 		commandsDir: path.join(__dirname, "commands"),
