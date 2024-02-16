@@ -68,7 +68,7 @@ const client = new Client({
 });
 
 client.on("ready", () => {
-	console.log("${client.user.username} is Ready!");
+	console.log(`${client.user.username} is Ready!`);
 	client.user.setActivity("<STATUS>", { type: "PLAYING" });
 	new WOK({
 		client,
